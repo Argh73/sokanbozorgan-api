@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>سخن بزرگان API</title>
+</head>
+<body>
+  <pre id="output">در حال بارگذاری...</pre>
+
+  <script type="module">
+    fetch('quotes.json')
+      .then(r => r.json())
+      .then(quotes => {
+        const random = quotes[Math.floor(Math.random() * quotes.length)];
+        const response = {
+          ok: true,
+          dev: "Argh94",
+          quote: random
+        };
+        document.getElementById('output').textContent = JSON.stringify(response, null, 2);
+      })
+      .catch(() => {
+        document.getElementById('output').textContent = JSON.stringify({
+          ok: false,
+          dev: "Argh94",
+          quote: { body: "خطا در بارگذاری", author: "API" }
+        }, null, 2);
+      });
+  </script>
+</body>
+</html>
